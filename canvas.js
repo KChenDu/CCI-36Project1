@@ -11,7 +11,7 @@ x.style.left=""+b.left+"px";
 
 document.body.appendChild(x);
 
-canvas= x
+canvas = x
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
@@ -21,21 +21,13 @@ const camera = new THREE.PerspectiveCamera(
     1000)
 const renderer = new THREE.WebGLRenderer({antialias:true, canvas: canvas, alpha:true})
 
-camera.position.set(0,0,30);
+camera.position.set(0,30,0);
 camera.lookAt(0,0,0);
 
 scene.add(camera);
 
-window.onresize = canvasResize;
-
-function canvasResize()
-{
-    camera.aspect=window.innerWidth / window.innerHeight
-    camera.updateProjectionMatrix();
-}
-
-// renderer.setSize(window.innerWidth, window.innerHeight);
-// document.body.appendChild(renderer.domElement);
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 // const controls = new THREE.OrbitControls(camera);
 const axesHelper = new THREE.AxesHelper(10);
 scene.add(axesHelper);
@@ -51,7 +43,7 @@ const sunshine = new THREE.PointLight(0xffffff, 3.0);
 scene.add(sunshine);
 const earth_geometry = new THREE.SphereGeometry(1);
 const earth_material = new THREE.MeshLambertMaterial({
-    color: 0x00BFFF,
+    color: 0x000080,
     wireframe: false
 });
 
@@ -71,15 +63,42 @@ g.add(earth);
 g.add(moon);
 scene.add(g);
 
-let earth_angle = 0
-let moon_angular_v = 0.13;
-let earth_angular_v = 0.01;
+const venus_geometry =  new THREE.SphereGeometry(1);
+const venus_material = new THREE.MeshLambertMaterial({
+    color: 0xDAA520,
+    wireframe: false
+});
+const venus = new THREE.Mesh(venus_geometry, venus_material);
+scene.add(venus);
+
+const mercury_geometry =  new THREE.SphereGeometry(0.6);
+const mercury_material = new THREE.MeshLambertMaterial({
+    color: 0x696969,
+    wireframe: false
+});
+const mercury = new THREE.Mesh(mercury_geometry, mercury_material);
+scene.add(mercury);
+
+let mercury_angle = 0
+const mercury_angular_v = 0.045;
+let venus_angle = 0
+const venus_angular_v = 0.015;
+let earth_angle = 0;
+const moon_angular_v = 0.13;
+const earth_angular_v = 0.01;
+
 const animate = function () {
     // controls.update();
     requestAnimationFrame(animate);
+    mercury.position.set(4 * Math.sin(mercury_angle), 0, 4 * Math.cos(mercury_angle))
+    venus.position.set(7 * Math.sin(venus_angle), 0, 7 * Math.cos(venus_angle))
     g.rotation.y += moon_angular_v;
     g.position.set(solar_distance * Math.sin(earth_angle), 0, solar_distance * Math.cos(earth_angle))
+
+
     renderer.render(scene, camera);
+    mercury_angle += mercury_angular_v;
+    venus_angle += venus_angular_v;
     earth_angle += earth_angular_v;
 };
 
