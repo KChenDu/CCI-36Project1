@@ -21,14 +21,14 @@ const camera = new THREE.PerspectiveCamera(
     1000)
 const renderer = new THREE.WebGLRenderer({antialias:true, canvas: canvas, alpha:true})
 
-camera.position.set(0,30,0);
+camera.position.set(0,0,30);
 camera.lookAt(0,0,0);
 
 scene.add(camera);
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
-// const controls = new THREE.OrbitControls(camera);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
 const axesHelper = new THREE.AxesHelper(10);
 scene.add(axesHelper);
 
@@ -88,7 +88,7 @@ const moon_angular_v = 0.13;
 const earth_angular_v = 0.01;
 
 const animate = function () {
-    // controls.update();
+    controls.update();
     requestAnimationFrame(animate);
     mercury.position.set(4 * Math.sin(mercury_angle), 0, 4 * Math.cos(mercury_angle))
     venus.position.set(7 * Math.sin(venus_angle), 0, 7 * Math.cos(venus_angle))
