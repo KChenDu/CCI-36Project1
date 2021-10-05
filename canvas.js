@@ -25,8 +25,7 @@ const camera = new THREE.PerspectiveCamera(
     1000)
 const renderer = new THREE.WebGLRenderer({antialias:true, canvas: canvas, alpha:true})
 
-camera.position.set(0,0,30);
-camera.lookAt(0,0,0);
+camera.position.set(20,5,20);
 
 scene.add(camera);
 
@@ -99,6 +98,7 @@ const ring_mat = new THREE.MeshBasicMaterial({
     side: THREE.DoubleSide 
 })
 const ring = new THREE.Mesh(ring_geo, ring_mat);
+ring.rotateX(3.14 * 63 / 180 )
 saturn.m.add(ring)
 
 const others = [moon]
@@ -124,6 +124,7 @@ const animate = function () {
     }
     sun.m.visible = (anim.checked===true)
     axesHelper.visible = (eixos.checked===true)
+    console.log(camera.projectionMatrix.elements)
     renderer.render(scene, camera);
 };
 
