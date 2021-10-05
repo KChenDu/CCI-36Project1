@@ -25,15 +25,17 @@ const camera = new THREE.PerspectiveCamera(
     1000)
 const renderer = new THREE.WebGLRenderer({antialias:true, canvas: canvas, alpha:true})
 
-camera.position.set(20,5,20);
-
+scene.translateOnAxis(new THREE.Vector3(-1,1,0.2).normalize(), 2.3)
+camera.position.set(15, 8, 15);
 scene.add(camera);
 
 renderer.setSize(canvas.width, canvas.height);
 document.body.appendChild(renderer.domElement);
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 const axesHelper = new THREE.AxesHelper(10);
+const gridHelper = new THREE.GridHelper(25)
 scene.add(axesHelper);
+scene.add(gridHelper)
 
 function Orb(rad, color, fat_dist, ang_v, is_sun=false) {
     this.rad = rad
@@ -73,6 +75,7 @@ const neptune = new Orb(0.4, 0x4B70DD, 12,  2/59800)
 const planets = [mercury, venus, earth, mars, jupiter, saturn, uranus, neptune]
 
 for (let p of planets) {
+    p.ang = 2*Math.PI * Math.random()
     sun.m.add(p.m)
 }
 
@@ -124,6 +127,8 @@ const animate = function () {
     }
     sun.m.visible = (anim.checked===true)
     axesHelper.visible = (eixos.checked===true)
+    gridHelper.visible = (grid.checked===true)
+
     console.log(camera.projectionMatrix.elements)
     renderer.render(scene, camera);
 };

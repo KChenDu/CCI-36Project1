@@ -1,52 +1,39 @@
-original = [1.1683 0 0 0;
-            0 2.4142 0 0;
-            0 0 -1.002 -1
-            0 0 -2.002 0];
+point1 = [0; 0; 0; 1];
+point2 = [1; 0; 0; 1];
+point3 = [0; 1; 0; 1];
+point4 = [0; 0; 1; 1];
+point5 = [1; 0; 1; 1];
+point6 = [1; 1; 1; 1];
+proj1 = [0, 0];
+proj2 = [15, -5];
+proj3 = [0, 20];
+proj4 = [-15, -5];
+proj5 = [-10, -10];
+proj6 = [0, 5];
 
-coord1 = [0; 0; 1; 1];
-coord2 = [1; 0; 1; 1];
-coord3 = [0; 1; 1; 1];
-coord4 = [1; 1; 1; 1];
-coord5 = [1; 2; 3; 1];
-coord6 = [2; 3; 4; 1];
+X1 = point1(1);
+Y1 = point1(2);
+Z1 = point1(3);
 
-proj1 = original * coord1;
-proj2 = original * coord2;
-proj3 = original * coord3;
-proj4 = original * coord4;
-proj5 = original * coord5;
-proj6 = original * coord6;
+X2 = point2(1);
+Y2 = point2(2);
+Z2 = point2(3);
 
-proj1 = proj1 / proj1(4);
-proj2 = proj2 / proj2(4);
-proj3 = proj3 / proj3(4);
-proj4 = proj4 / proj4(4);
-proj5 = proj5 / proj5(4);
-proj6 = proj6 / proj6(4);
+X3 = point3(1);
+Y3 = point3(2);
+Z3 = point3(3);
 
-X1 = coord1(1);
-Y1 = coord1(2);
-Z1 = coord1(3);
+X4 = point4(1);
+Y4 = point4(2);
+Z4 = point4(3);
 
-X2 = coord2(1);
-Y2 = coord2(2);
-Z2 = coord2(3);
+X5 = point5(1);
+Y5 = point5(2);
+Z5 = point5(3);
 
-X3 = coord3(1);
-Y3 = coord3(2);
-Z3 = coord3(3);
-
-X4 = coord4(1);
-Y4 = coord4(2);
-Z4 = coord4(3);
-
-X5 = coord5(1);
-Y5 = coord5(2);
-Z5 = coord5(3);
-
-X6 = coord6(1);
-Y6 = coord6(2);
-Z6 = coord6(3);
+X6 = point6(1);
+Y6 = point6(2);
+Z6 = point6(3);
 
 x1 = proj1(1);
 y1 = proj1(2);
