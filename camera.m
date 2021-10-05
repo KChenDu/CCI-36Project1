@@ -1,15 +1,21 @@
-point1 = [0; 0; 0; 1];
-point2 = [1; 0; 0; 1];
-point3 = [0; 1; 0; 1];
-point4 = [0; 0; 1; 1];
-point5 = [1; 0; 1; 1];
-point6 = [1; 1; 1; 1];
-proj1 = [0, 0];
-proj2 = [15, -5];
-proj3 = [0, 20];
-proj4 = [-15, -5];
-proj5 = [-10, -10];
-proj6 = [0, 5];
+point1 = [0; 0; 0];
+point2 = [1; 0; 0];
+point3 = [0; 1; 0];
+point4 = [0; 0; 1];
+point5 = [1; 0; 1];
+point6 = [1; 1; 1];
+
+d = 3; % Abstract value for size control
+theta = pi / 12; % angular of perspective
+
+% Aqui imaginamos que a câmera se posiciona sobre o plano x = z e
+% olha para a origem com um angulo de visão theta, para baixo.
+proj1 = [-2, 4];
+proj2 = proj1 + [d / 2, -d * sin(theta) / 2];
+proj3 = proj1 + [0, d * cos(theta)];
+proj4 = proj1 + [-d / 2, -d * sin(theta) / 2];
+proj5 = proj1 + [0, -d * sin(theta)];
+proj6 = proj1 + [0, d * cos(theta) - d * sin(theta) / 2];
 
 X1 = point1(1);
 Y1 = point1(2);

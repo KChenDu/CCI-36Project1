@@ -56,6 +56,13 @@ Saturno é criado tal como os outros planetas, porém seu anel usa conceitos THR
 Para realizar o cálculo da matriz de câmera, o grupo utilizou um script de MATLAB, camera.m.
 Neste script, deve-se tomar primeiramente 6 pontos do modelo 3D nomeados de point1 até point6, e em seguida, define-se outros 6 pontos de projeção em 2D, proj1 até proj6, correspondentes respectivamente aos 6 pontos 3D anteriores. Deste modo, consegue-se construir um sistema à obtenção da matriz de câmera utiliando a equação dada pelo método 1 da aula Viewing. A execução do script retorna um array de 11 elementos, que são os valores dos elememtos m11, m12, m13, m14, m21, ..., m33(com m34 normalizado para 1). 
 
+Sobre a escolha dos pontos, em modelo 3D, imaginamos um cubo com um vértice na origem e aresta 1 extendendo para direções positivas 
+dos eixos, e escolhemos os vértices (0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 0, 1) e (1, 1, 1)
+para serem os pontos referenciais da projeção.
+
+Em plano 2D, definimos a origem em (-2, 4) e, com mais algumas análises geométricas, podemos obter as posições dos outros vértices, repectivamente, cujo detalhe pode
+ser vista em camera.m. 
+
 ## Interação com animação
 
 Para controlar a visibilidade dos elementos da animação e também da imagem de fundo, são fornecidos três checkboxes auto explicativos que são vistos abaixo do canvas da animação. Note que tornar a animação invisivel não a pausa.
