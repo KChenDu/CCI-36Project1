@@ -17,8 +17,14 @@ o aprendizado mais intuitivo.
 Assim, o foco do trabalho está em reproduzir um sistema solar que mostra, em primeiro lugar, os movimentos translacionais 
 das planetas.
 
+## Descrição dos itens
+
+### Imagen do fundo
+
 Seguindo a motivação didática, o grupo escolheu uma imagem de uma sala de aula e utilizou o exemplar do curso over_the_page.html 
 para colocar ela como imagem do fundo.
+
+### Criação do Sol e Vênus
 
 Com relação aos modelos 3D, embora na prática o grupo teve que fazer 9 objetos astronômicos, pode-se entretanto resumir as implementações 
 com apenas 4 deles, Sol, Vênus, Terra e Saturno.
@@ -37,14 +43,14 @@ z = distância_solar_venus * cos(theta)
 
 x = distância_solar_venus * sin(theta)
 
+### Criação da Terra e Lua
+
 Por outro lado, a implementação da Terra já demanda a utilização do grupo, pois simplifica bastante o movimento da lua.
 
 De maneira sucinta, criou-se dois objetos esféricos e colocou-se o menor a uma certa distância do maior(distância lunar). Em seguida,
 definiu-se um grupo contendo os dois. Por fim, podemos realizar então o movimento da Lua em torno da Terra e da Terra em torno do 
 Sol como uma composição de movimentos. Por um lado, a rotação do grupo(movimento da Lua), e por outro, a atualização das coordenadas da Terra
 (movimento da Terra).
-
-
 
 ## Interação com animação
 
