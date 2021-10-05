@@ -32,74 +32,51 @@ const controls = new THREE.OrbitControls(camera, renderer.domElement);
 const axesHelper = new THREE.AxesHelper(10);
 scene.add(axesHelper);
 
-const sun_geometry = new THREE.SphereGeometry(2);
-const sun_material = new THREE.MeshBasicMaterial({
-    color: 0xFF4500,
-    wireframe: false,
-});
-const sun = new THREE.Mesh(sun_geometry, sun_material);
-scene.add(sun);
+function Orb(rad, color, ang_v, fat_dist=0, is_sun=false) {
+    this.geometry = new THREE.SphereGeometry(rad)
+    const mat_constr = (is_sun
+        ? THREE.MeshBasicMaterial
+        : THREE.MeshLambertMaterial)
+    this.material = new mat_constr({
+        color: color,
+        wireframe: false,
+    })
+    this.m = new THREE.Mesh(this.geometry, this.material)
+    this.ang_v = ang_v
+    this.ang = 0
+    this.fat_dist = fat_dist
+}
+
+const sun = new Orb(2, 0xFF4500, 0, 0, true)
+const earth = new Orb(0.5, 0x000080, 0.01, 10)
+const moon = new Orb(0.2, 0xd3d3d3, 0.13, 1.5)
+const venus = new Orb(0.5, 0xdaa520, 0.015, 7)
+const mercury = new Orb(0.6, 0x696969, 0.045, 4)
+
+scene.add(sun.m);
+scene.add(venus.m);
+scene.add(mercury.m);
+earth.m.add(moon.m)
+scene.add(earth.m)
+
 const sunshine = new THREE.PointLight(0xffffff, 3.0);
 scene.add(sunshine);
-const earth_geometry = new THREE.SphereGeometry(1);
-const earth_material = new THREE.MeshLambertMaterial({
-    color: 0x000080,
-    wireframe: false
-});
 
-const earth = new THREE.Mesh(earth_geometry, earth_material);
-let solar_distance = 10;
-
-const moon_geometry = new THREE.SphereGeometry(0.2);
-const moon_material = new THREE.MeshLambertMaterial({
-    color: 0xD3D3D3,
-    wireframe: false
-});
-const moon = new THREE.Mesh(moon_geometry, moon_material);
-const radius = 1.5;
-moon.position.set(earth.position.x, 0, earth.position.z + radius);
-const g = new THREE.Group();
-g.add(earth);
-g.add(moon);
-scene.add(g);
-
-const venus_geometry =  new THREE.SphereGeometry(1);
-const venus_material = new THREE.MeshLambertMaterial({
-    color: 0xDAA520,
-    wireframe: false
-});
-const venus = new THREE.Mesh(venus_geometry, venus_material);
-scene.add(venus);
-
-const mercury_geometry =  new THREE.SphereGeometry(0.6);
-const mercury_material = new THREE.MeshLambertMaterial({
-    color: 0x696969,
-    wireframe: false
-});
-const mercury = new THREE.Mesh(mercury_geometry, mercury_material);
-scene.add(mercury);
-
-let mercury_angle = 0
-const mercury_angular_v = 0.045;
-let venus_angle = 0
-const venus_angular_v = 0.015;
-let earth_angle = 0;
-const moon_angular_v = 0.13;
-const earth_angular_v = 0.01;
+orbs = [sun, earth, moon, venus, mercury]
 
 const animate = function () {
     controls.update();
     requestAnimationFrame(animate);
-    mercury.position.set(4 * Math.sin(mercury_angle), 0, 4 * Math.cos(mercury_angle))
-    venus.position.set(7 * Math.sin(venus_angle), 0, 7 * Math.cos(venus_angle))
-    g.rotation.y += moon_angular_v;
-    g.position.set(solar_distance * Math.sin(earth_angle), 0, solar_distance * Math.cos(earth_angle))
-
-
+    for(let orb of orbs){
+        const d = orb.fat_dist
+        const ang = orb.ang
+        const ang_v = orb.ang_v
+        
+        orb.m.position.set(d * Math.sin(ang), 0, d * Math.cos(ang))
+        orb.ang += ang_v
+    }
+    
     renderer.render(scene, camera);
-    mercury_angle += mercury_angular_v;
-    venus_angle += venus_angular_v;
-    earth_angle += earth_angular_v;
 };
 
 animate();
