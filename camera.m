@@ -6,7 +6,7 @@ point5 = [1; 0; 1];
 point6 = [1; 1; 1];
 
 d = 3; % Abstract value for size control
-theta = pi / 12; % angular of perspective
+theta = pi / 12; % angle of perspective
 
 % Aqui imaginamos que a câmera se posiciona sobre o plano x = z e
 % olha para a origem com um angulo de visão theta, para baixo.
